@@ -5,18 +5,27 @@
 <p>
     <a asp-controller="events" asp-action="add">Add Event</a>
 </p>
-<ul>
-    @if (ViewBag.events.Count > 0)
-    {
-        @foreach (string codingEvent in ViewBag.events)
-        {
-            <li>@codingEvent</li>
-        }
-    }
-    else
-    {
-        <h2>No Events Yet!</h2>
-    }
-</ul>
+@if (ViewBag.events.Count == 0)
+{
+    <h2>No Events Yet!</h2>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Event Name</th>
+                <th>Event Descripton</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (KeyValuePair<string, string> codingEvent in ViewBag.events)
+            {
+                <td>@codingEvent.Key</td>
+                <td>@codingEvent.Value</td>
+            }
+        </tbody>
+    </table>
+}
 
 <partial name="/Views/Shared/_LinkListPartial.cshtml" />
