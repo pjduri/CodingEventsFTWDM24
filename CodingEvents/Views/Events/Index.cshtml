@@ -11,21 +11,23 @@
 }
 else
 {
-    <table>
+    <table class="table">
         <thead>
             <tr>
+                <th>Event ID</th>
                 <th>Event Name</th>
                 <th>Event Descripton</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (KeyValuePair<string, string> codingEvent in ViewBag.events)
+            @foreach (var codingEvent in ViewBag.events)
             {
-                <td>@codingEvent.Key</td>
-                <td>@codingEvent.Value</td>
+                <tr>
+                    <td>@codingEvent.Id</td>
+                    <td>@codingEvent.Name</td>
+                    <td>@codingEvent.Description</td>
+                </tr>
             }
         </tbody>
     </table>
 }
-
-<partial name="/Views/Shared/_LinkListPartial.cshtml" />

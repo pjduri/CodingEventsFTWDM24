@@ -4,12 +4,9 @@ namespace CodingEvents;
 
 public class EventsController : Controller
 {
-    private static Dictionary<string, string> Events { get; set; } = [];
-
-    [HttpGet]
     public IActionResult Index()
     {
-        ViewBag.events = Events;
+        ViewBag.events = EventData.GetAll();
 
         return View();
     }
@@ -21,9 +18,27 @@ public class EventsController : Controller
     }
 
     [HttpPost("/events/add")]
-    public IActionResult NewEvent(string eventName, string eventDescription)
+    public IActionResult NewEvent(Event newEvent)
     {
-        Events.Add(eventName, eventDescription);
+        EventData.Add(newEvent);
+        return Redirect("/events");
+    }
+
+    public IActionResult Delete()
+    {
+        ViewBag.events = EventData.GetAll();
+
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult Delete(int[] eventIds)
+    {
+        foreach (int eventId in eventIds)
+        {
+            EventData.Remove(eventId);
+        }
+
         return Redirect("/events");
     }
 }
