@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CodingEvents;
+namespace CodingEvents.Models;
 
 public class Event()
 {

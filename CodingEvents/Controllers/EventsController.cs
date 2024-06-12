@@ -1,4 +1,6 @@
 ﻿using CodingEvents.ViewModels;
+using CodingEvents.Models;
+using CodingEvents.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodingEvents.Controllers;
