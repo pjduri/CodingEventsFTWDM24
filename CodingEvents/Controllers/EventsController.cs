@@ -39,7 +39,8 @@ public class EventsController : Controller
                 {
                     Name = addEventViewModel.Name,
                     Description = addEventViewModel.Description,
-                    ContactEmail = addEventViewModel.ContactEmail
+                    ContactEmail = addEventViewModel.ContactEmail,
+                    Type = addEventViewModel.Type
                 };
             context.Events.Add(newEvent);
             context.SaveChanges();

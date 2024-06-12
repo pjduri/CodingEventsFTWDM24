@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CodingEvents.ViewModels;
 
@@ -14,4 +15,12 @@ public class AddEventViewModel
 
     [EmailAddress]
     public string? ContactEmail { get; set; }
+    public EventType Type { get; set; }
+       public List<SelectListItem> EventTypes { get; set; } = new List<SelectListItem>
+   {
+      new(EventType.Conference.ToString(), ((int)EventType.Conference).ToString()),
+      new(EventType.Meetup.ToString(), ((int)EventType.Meetup).ToString()),
+      new(EventType.Social.ToString(), ((int)EventType.Social).ToString()),
+      new(EventType.Workshop.ToString(), ((int)EventType.Workshop).ToString())
+   };
 }
