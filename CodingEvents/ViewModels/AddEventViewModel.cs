@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using CodingEvents.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CodingEvents.ViewModels;

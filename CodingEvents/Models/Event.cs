@@ -11,7 +11,7 @@ public class Event
     public EventType Type { get; set; }
 
     public Event(){}
-    public Event(string? name, string? description, string? contactEmail) : this()
+    public Event(string? name, string? description, string? contactEmail)
     {
         Name = name;
         Description = description;
