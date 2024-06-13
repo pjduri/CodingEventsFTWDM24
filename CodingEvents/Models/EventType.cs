@@ -1,4 +1,4 @@
-﻿namespace CodingEvents;
+﻿namespace CodingEvents.Models;
 
 public enum EventType
 {
