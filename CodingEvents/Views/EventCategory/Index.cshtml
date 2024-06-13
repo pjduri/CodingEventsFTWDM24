@@ -1,0 +1,21 @@
+@using CodingEvents.Models
+@model List<EventCategory>
+
+<h1>All Categories</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (EventCategory category in @Model)
+        {
+            <tr>
+                <td>@category.Id</td>
+                <td>@category.Name</td>
+            </tr>
+        }
+    </tbody>
+</table>
