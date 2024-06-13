@@ -1,32 +1,58 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CodingEvents.ViewModels;
+using CodingEvents.Models;
+using CodingEvents.Data;
+using Microsoft.AspNetCore.Mvc;
 
-namespace CodingEvents;
+namespace CodingEvents.Controllers;
 
 public class EventsController : Controller
 {
+    private EventDbContext context;
+
+    public EventsController(EventDbContext dbContext)
+    {
+        context = dbContext;
+    }
+
     public IActionResult Index()
     {
-        ViewBag.events = EventData.GetAll();
+        List<Event> events = context.Events.ToList();
 
-        return View();
+        return View(events);
     }
 
     [HttpGet]
     public IActionResult Add()
     {
-        return View();
+        AddEventViewModel addEventViewModel = new();
+
+        return View(addEventViewModel);
     }
 
-    [HttpPost("/events/add")]
-    public IActionResult NewEvent(Event newEvent)
+    [HttpPost]
+    public IActionResult Add(AddEventViewModel addEventViewModel)
     {
-        EventData.Add(newEvent);
-        return Redirect("/events");
+        if (ModelState.IsValid)
+        {
+            Event newEvent =
+                new()
+                {
+                    Name = addEventViewModel.Name,
+                    Description = addEventViewModel.Description,
+                    ContactEmail = addEventViewModel.ContactEmail,
+                    Type = addEventViewModel.Type
+                };
+            context.Events.Add(newEvent);
+            context.SaveChanges();
+
+            return Redirect("/events");
+        }
+        return View(addEventViewModel);
     }
 
     public IActionResult Delete()
     {
-        ViewBag.events = EventData.GetAll();
+        ViewBag.events = context.Events.ToList();
 
         return View();
     }
@@ -36,8 +62,10 @@ public class EventsController : Controller
     {
         foreach (int eventId in eventIds)
         {
-            EventData.Remove(eventId);
+            Event? theEvent = context.Events.Find(eventId);
+            context.Events.Remove(theEvent);
         }
+        context.SaveChanges();
 
         return Redirect("/events");
     }

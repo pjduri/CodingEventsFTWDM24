@@ -1,11 +1,14 @@
-@{
-}
-<link rel="stylesheet" type="text/css" href="~/css/custom.css">
+@using CodingEvents.Models
+@model List<Event>
+
 <h1>Coding Events</h1>
 <p>
     <a asp-controller="events" asp-action="add">Add Event</a>
 </p>
-@if (ViewBag.events.Count == 0)
+<p>
+    <a asp-controller="events" asp-action="delete">Delete Event</a>
+</p>
+@if (Model.Count == 0)
 {
     <h2>No Events Yet!</h2>
 }
@@ -14,18 +17,22 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Event ID</th>
-                <th>Event Name</th>
-                <th>Event Descripton</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Descripton</th>
+                <th>Contact Email</th>
+                <th>Event Type</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var codingEvent in ViewBag.events)
+            @foreach (var codingEvent in Model)
             {
                 <tr>
                     <td>@codingEvent.Id</td>
                     <td>@codingEvent.Name</td>
                     <td>@codingEvent.Description</td>
+                    <td>@codingEvent.ContactEmail</td>
+                    <td>@codingEvent.Type</td>
                 </tr>
             }
         </tbody>
