@@ -1,13 +1,19 @@
 ﻿namespace CodingEvents;
 
-public class Event()
+public class Event
 {
     public string Name { get; set; } = "";
     public string Description { get; set; } = "";
     private static int nextId = 1;
-    public int Id { get; } = nextId++;
+    public int Id { get; }
 
-    public Event(string name, string description) : this()
+    public Event()
+    {
+        Id = nextId;
+        nextId++;
+    }
+
+    public Event(string name, string description)
     {
         Name = name;
         Description = description;
