@@ -16,12 +16,21 @@ public class AddEventViewModel
 
     [EmailAddress]
     public string? ContactEmail { get; set; }
-    public EventType Type { get; set; }
-       public List<SelectListItem> EventTypes { get; set; } = new List<SelectListItem>
-   {
-      new(EventType.Conference.ToString(), ((int)EventType.Conference).ToString()),
-      new(EventType.Meetup.ToString(), ((int)EventType.Meetup).ToString()),
-      new(EventType.Social.ToString(), ((int)EventType.Social).ToString()),
-      new(EventType.Workshop.ToString(), ((int)EventType.Workshop).ToString())
-   };
+    public int CategoryId { get; set; }
+
+    public List<SelectListItem>? Categories { get; set; }
+
+    public AddEventViewModel(){}
+    public AddEventViewModel(List<EventCategory> categories)
+    {
+      Categories = [];
+      foreach (var category in categories)
+      {
+         Categories.Add(new SelectListItem
+         {
+            Value = category.Id.ToString(),
+            Text = category.Name
+         });
+      }
+    }
 }
