@@ -21,7 +21,7 @@ public class TagController : Controller
 
     public IActionResult Add()
     {
-        Tag tag = new Tag();
+        Tag tag = new();
         return View(tag);
     }
 
@@ -32,9 +32,9 @@ public class TagController : Controller
         {
             context.Tags.Add(tag);
             context.SaveChanges();
-            return Redirect("/Tag/");
+            return Redirect("/Tag");
         }
 
-        return View("Add", tag);
+        return View(tag);
     }
 }

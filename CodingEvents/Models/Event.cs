@@ -10,6 +10,7 @@ public class Event
     public string? ContactEmail { get; set; }
     public EventCategory Category { get; set; }
     public int CategoryId { get; set; }
+    public ICollection<Tag>? Tags { get; set; }
 
     public Event(){}
     public Event(string? name, string? description, string? contactEmail)
@@ -17,6 +18,7 @@ public class Event
         Name = name;
         Description = description;
         ContactEmail = contactEmail;
+        Tags = [];
     }
 
 
