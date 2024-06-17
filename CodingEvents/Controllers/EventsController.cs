@@ -67,10 +67,18 @@ public class EventsController : Controller
         foreach (int eventId in eventIds)
         {
             Event? theEvent = context.Events.Find(eventId);
+            if (theEvent is null) break;
             context.Events.Remove(theEvent);
         }
         context.SaveChanges();
 
         return Redirect("/events");
+    }
+
+    public IActionResult Detail (int id)
+    {
+        Event theEvent = context.Events.Include(e => e.Category).Single(e => e.Id == id);
+        EventDetailViewModel viewModel = new(theEvent);
+        return View(viewModel);
     }
 }
