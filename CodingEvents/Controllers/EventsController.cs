@@ -1,6 +1,6 @@
-﻿using CodingEvents.ViewModels;
+﻿using CodingEvents.Data;
 using CodingEvents.Models;
-using CodingEvents.Data;
+using CodingEvents.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -68,6 +68,7 @@ public class EventsController : Controller
         {
             Event? theEvent = context.Events.Find(eventId);
             if (theEvent is null) break;
+            
             context.Events.Remove(theEvent);
         }
         context.SaveChanges();
@@ -75,9 +76,12 @@ public class EventsController : Controller
         return Redirect("/events");
     }
 
-    public IActionResult Detail (int id)
+    public IActionResult Detail(int id)
     {
-        Event theEvent = context.Events.Include(e => e.Category).Single(e => e.Id == id);
+        Event theEvent = context.Events
+            .Include(e => e.Category)
+            .Include(e => e.Tags)
+            .Single(e => e.Id == id);
         EventDetailViewModel viewModel = new(theEvent);
         return View(viewModel);
     }
