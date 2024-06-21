@@ -20,6 +20,7 @@
     <div class="form-group">
         <label asp-for="CategoryId">Category</label>
         <select asp-for="CategoryId" asp-items="Model.Categories"></select>
+        <a asp-controller="Employer" asp-action="Create">Add Employer</a>
     </div>
     <input type="submit" value="Add Event" class="btn btn-primary">
 </form>
